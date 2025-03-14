@@ -1,8 +1,8 @@
 <?php
 
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
+use PHPUnit\Framework\TestCase;
 
-pest()->extend(ApiTestCase::class);
+pest()->extend(TestCase::class);
 
 it('purchases one time using aci successfully', function () {
     $client = static::createClient();

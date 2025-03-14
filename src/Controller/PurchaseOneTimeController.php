@@ -3,17 +3,19 @@
 namespace App\Controller;
 
 use App\Dto\PurchaseOneTimeRequestDto;
+use App\Dto\PurchaseOneTimeResponseDto;
 use App\Service\PurchaseOneTimeService;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
-use ApiPlatform\Metadata\Post;
-use App\Dto\PurchaseOneTimeResponseDto;
+use OpenApi\Annotations as OA;
 
-#[Post(input: PurchaseOneTimeRequestDto::class, output: PurchaseOneTimeResponseDto::class)]
 final class PurchaseOneTimeController extends AbstractController
 {
+    #[OA\RequestBody(content: new Model(type: PurchaseOneTimeRequestDto::class, groups: ['full']))]
+    #[OA\Response(response: 200, content: new Model(type: PurchaseOneTimeResponseDto::class, groups: ['full']))]
     #[Route(
         '/purchase-one-time/{externalSystem}',
         name: 'purchase_one_time',
