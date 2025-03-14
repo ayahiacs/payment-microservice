@@ -12,9 +12,7 @@ class PurchaseServiceFactory implements ServiceSubscriberInterface
 {
     function __construct(
         private ContainerInterface $locator,
-    ) {
-
-    }
+    ) {}
 
     /**
      * here we can register new external systems services
