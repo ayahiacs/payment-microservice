@@ -18,6 +18,17 @@
 ## Docs
 1. TODO: [How to add a new external system](docs/add-external-system.md)
 
+## Todo
+1. Handle the third party error responses.
+2. Add extensive logs.
+3. Retry the failed calls in case of server error.
+4. Save them as failed if failed for many times.
+5. Swagger documentation.
+6. Code comments.
+7. PHPStan, PHP_CodeSniffer, PHPat.
+8. CI/CD
+9. Caching, Cron jobs
+
 ## Credits
 
 Created by [Ahmed Yahia](https://www.linkedin.com/in/ahmad-yahia/).
