@@ -8,7 +8,7 @@ An awesome payment microservice!
 4. open http://localhost/api/doc in your browser to see the swagger documentation.
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
 6. Run `make test "c=--coverage"` to run the tests.
-7. Run `make sf app:purchase-one-time shift4` to run the command.
+7. Run `make sf "c=app:purchase-one-time shift4"` to run the command.
 
 ## Features
 1. Purchase one time.
