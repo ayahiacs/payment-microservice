@@ -18,9 +18,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class PurchaseOneTimeCommand extends Command
 {
     public function __construct(
-        private PurchaseOneTimeService $purchaseOneTimeService
-    )
-    {
+        private PurchaseOneTimeService $purchaseOneTimeService,
+    ) {
         parent::__construct();
     }
 
@@ -30,7 +29,7 @@ class PurchaseOneTimeCommand extends Command
             ->addArgument('externalSystem', InputArgument::REQUIRED, 'The external system to purhcase');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output, ): int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -46,7 +45,7 @@ class PurchaseOneTimeCommand extends Command
         );
 
         $this->purchaseOneTimeService->purchaseOneTime($externalSystem, $purchaseOneTimeRequestDto);
-    
+
         $io->success("The amount {$purchaseOneTimeRequestDto->amount} has been charged using {$externalSystem} successfully!");
 
         return Command::SUCCESS;

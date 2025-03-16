@@ -10,9 +10,10 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
 class ExceptionListener
 {
-    function __construct(
-        private ?LoggerInterface $logger
-    ) {}
+    public function __construct(
+        private ?LoggerInterface $logger,
+    ) {
+    }
 
     public function __invoke(ExceptionEvent $event): void
     {

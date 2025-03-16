@@ -11,8 +11,9 @@ final class CardRequest
         public string $holder,
         public int $expiryMonth,
         public int $expiryYear,
-        public string $cardCvv
-    ) {}
+        public string $cardCvv,
+    ) {
+    }
 
     public static function createFromPurchaseOneTimeRequestDto(PurchaseOneTimeRequestDto $dto): self
     {

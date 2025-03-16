@@ -4,7 +4,8 @@ namespace App\Integration\Aci\Response;
 
 class Risk
 {
-    function __construct(
-        public string $score
-    ) {}
+    public function __construct(
+        public string $score,
+    ) {
+    }
 }

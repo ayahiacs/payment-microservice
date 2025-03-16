@@ -10,7 +10,6 @@ use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-
 class AciGateway
 {
     public function __construct(
@@ -18,13 +17,13 @@ class AciGateway
         private SerializerInterface $serializer,
         private string $apiKey,
         private string $baseUrl = 'https://eu-test.oppwa.com/v1',
-    ) {}
+    ) {
+    }
 
     public function performDebitPayment(DebitPaymentRequest $request): DebitPaymentResponse
     {
-
         try {
-            $response = $this->client->request('POST', $this->baseUrl . '/payments', [
+            $response = $this->client->request('POST', $this->baseUrl.'/payments', [
                 'headers' => [
                     'Authorization' => "Bearer {$this->apiKey}",
                     'Content-Type' => 'application/json',
@@ -38,11 +37,13 @@ class AciGateway
                     'card.holder' => $request->card->holder,
                     'card.expiryMonth' => $request->card->expiryMonth,
                     'card.expiryYear' => $request->card->expiryYear,
-                    'card.cvv' => $request->card->cardCvv
+                    'card.cvv' => $request->card->cardCvv,
                 ],
             ]);
             $debitPaymentResponse = $this->serializer->deserialize(
-                $response->getContent(), DebitPaymentResponse::class, 'json'
+                $response->getContent(),
+                DebitPaymentResponse::class,
+                'json'
             );
         } catch (ClientExceptionInterface $e) {
             throw new PurchaseOneTimeException($e->getResponse()->getContent(false));

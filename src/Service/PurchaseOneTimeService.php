@@ -8,9 +8,10 @@ use App\Factory\PurchaseServiceFactory;
 
 class PurchaseOneTimeService
 {
-    function __construct(
-        private PurchaseServiceFactory $purchaseServiceFactory
-    ) {}
+    public function __construct(
+        private PurchaseServiceFactory $purchaseServiceFactory,
+    ) {
+    }
 
     public function purchaseOneTime(string $externalSystem, PurchaseOneTimeRequestDto $PurchaseOneTimeRequestDto): PurchaseOneTimeResponseDto
     {

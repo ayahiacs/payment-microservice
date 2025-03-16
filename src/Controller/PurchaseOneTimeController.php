@@ -6,11 +6,11 @@ use App\Dto\PurchaseOneTimeRequestDto;
 use App\Dto\PurchaseOneTimeResponseDto;
 use App\Service\PurchaseOneTimeService;
 use Nelmio\ApiDocBundle\Attribute\Model;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
-use OpenApi\Attributes as OA;
 
 final class PurchaseOneTimeController extends AbstractController
 {
@@ -18,7 +18,7 @@ final class PurchaseOneTimeController extends AbstractController
     #[
         OA\Response(
             response: 200,
-            description: "Success",
+            description: 'Success',
             content: new Model(type: PurchaseOneTimeResponseDto::class)
         )
     ]
@@ -31,7 +31,7 @@ final class PurchaseOneTimeController extends AbstractController
     public function __invoke(
         string $externalSystem,
         #[MapRequestPayload()] PurchaseOneTimeRequestDto $PurchaseOneTimeRequestDto,
-        PurchaseOneTimeService $purchaseOneTimeService
+        PurchaseOneTimeService $purchaseOneTimeService,
     ): JsonResponse {
         $purchaseOneTimeResponseDto = $purchaseOneTimeService->purchaseOneTime($externalSystem, $PurchaseOneTimeRequestDto);
 

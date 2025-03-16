@@ -10,12 +10,13 @@ use Symfony\Contracts\Service\ServiceSubscriberInterface;
 
 class PurchaseServiceFactory implements ServiceSubscriberInterface
 {
-    function __construct(
+    public function __construct(
         private ContainerInterface $locator,
-    ) {}
+    ) {
+    }
 
     /**
-     * here we can register new external systems services
+     * here we can register new external systems services.
      */
     public static function getSubscribedServices(): array
     {
@@ -28,8 +29,9 @@ class PurchaseServiceFactory implements ServiceSubscriberInterface
     /**
      * Create a purchase service object based on the given external system.
      *
-     * @param string $externalSystem The external system for which to create the service.
-     * @return PurchaseOneTimeInterface The service.
+     * @param string $externalSystem the external system for which to create the service
+     *
+     * @return PurchaseOneTimeInterface the service
      */
     public function createPurshaseOneTimeService(string $externalSystem): PurchaseOneTimeInterface
     {

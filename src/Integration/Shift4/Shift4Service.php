@@ -6,13 +6,11 @@ use App\Contract\PurchaseOneTimeInterface;
 use App\Dto\PurchaseOneTimeRequestDto;
 use App\Dto\PurchaseOneTimeResponseDto;
 use App\Exception\PurchaseOneTimeException;
-use DateTimeImmutable;
-use Psr\Log\LoggerInterface;
-use Shift4\Shift4Gateway;
 use Shift4\Exception\Shift4Exception;
 use Shift4\Request\CardRequest;
 use Shift4\Request\ChargeRequest;
 use Shift4\Response\Charge;
+use Shift4\Shift4Gateway;
 
 class Shift4Service implements PurchaseOneTimeInterface
 {
@@ -21,13 +19,13 @@ class Shift4Service implements PurchaseOneTimeInterface
     ) {
     }
 
-
     public function purchaseOneTime(PurchaseOneTimeRequestDto $purchaseOneTimeRequestDto): PurchaseOneTimeResponseDto
     {
         $chargeRequest = (new ChargeRequest())
             ->amount($purchaseOneTimeRequestDto->amount)
             ->currency($purchaseOneTimeRequestDto->currency)
-            ->card((new CardRequest())
+            ->card(
+                (new CardRequest())
                 ->number($purchaseOneTimeRequestDto->cardNumber)
                 ->expMonth($purchaseOneTimeRequestDto->cardExpiryMonth)
                 ->expYear($purchaseOneTimeRequestDto->cardExpiryYear)
@@ -43,7 +41,7 @@ class Shift4Service implements PurchaseOneTimeInterface
 
         return new PurchaseOneTimeResponseDto(
             transactionId: $charge->getId(),
-            createdAt: new DateTimeImmutable('now'),
+            createdAt: new \DateTimeImmutable('now'),
             amount: $charge->getAmount(),
             currency: $charge->getCurrency(),
             cardBin: $charge->getCard()->getFirst6(),

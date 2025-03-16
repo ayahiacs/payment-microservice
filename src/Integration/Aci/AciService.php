@@ -6,14 +6,13 @@ use App\Contract\PurchaseOneTimeInterface;
 use App\Dto\PurchaseOneTimeRequestDto;
 use App\Dto\PurchaseOneTimeResponseDto;
 use App\Integration\Aci\Request\DebitPaymentRequest;
-use DateTimeImmutable;
 
 class AciService implements PurchaseOneTimeInterface
 {
-
     public function __construct(
-        private AciGateway $aciGateway
-    ) {}
+        private AciGateway $aciGateway,
+    ) {
+    }
 
     public function purchaseOneTime(PurchaseOneTimeRequestDto $purchaseOneTimeRequestDto): PurchaseOneTimeResponseDto
     {
@@ -23,8 +22,8 @@ class AciService implements PurchaseOneTimeInterface
 
         return new PurchaseOneTimeResponseDto(
             transactionId: $debitPaymentResponse->id,
-            createdAt: new DateTimeImmutable('now'),
-            amount: (int)$debitPaymentResponse->amount,
+            createdAt: new \DateTimeImmutable('now'),
+            amount: (int) $debitPaymentResponse->amount,
             currency: $debitPaymentResponse->currency,
             cardBin: $debitPaymentResponse->card->bin,
         );

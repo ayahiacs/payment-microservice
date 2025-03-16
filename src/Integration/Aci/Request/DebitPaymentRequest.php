@@ -11,8 +11,9 @@ final class DebitPaymentRequest
         public int $amount,
         public string $currency,
         public string $paymentType,
-        public CardRequest $card
-    ) {}
+        public CardRequest $card,
+    ) {
+    }
 
     public static function createFromPurchaseOneTimeRequestDto(PurchaseOneTimeRequestDto $dto): self
     {
