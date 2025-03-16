@@ -5,7 +5,7 @@ namespace App\Dto;
 use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
-class PurchaseOneTimeResponseDto
+final readonly class PurchaseOneTimeResponseDto
 {
     public function __construct(
         public string $transactionId,
