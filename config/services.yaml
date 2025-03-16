@@ -35,3 +35,7 @@ services:
     App\Integration\Aci\AciGateway:
         arguments:
             $apiKey: '%env(resolve:ACI_API_KEY)%'
+
+    App\Service\PurchaseOneTimeService:
+        autowire: true
+        public: true

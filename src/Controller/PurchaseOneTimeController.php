@@ -29,7 +29,7 @@ final class PurchaseOneTimeController extends AbstractController
         requirements: ['externalSystem' => 'aci|shift4']
     )]
     public function __invoke(
-        $externalSystem,
+        string $externalSystem,
         #[MapRequestPayload()] PurchaseOneTimeRequestDto $PurchaseOneTimeRequestDto,
         PurchaseOneTimeService $purchaseOneTimeService
     ): JsonResponse {

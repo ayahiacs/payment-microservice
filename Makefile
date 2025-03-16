@@ -42,6 +42,10 @@ test: ## Start tests with pest, pass the parameter "c=" to add options to pest, 
 	@$(eval c ?=)
 	@$(DOCKER_COMP) exec php /app/vendor/bin/pest $(c)
 
+## —— PHPStan ——————————————————————————————————————————————————————————————
+phpstan: ## Run phpstan, pass the parameter "c=" to add options to phpstan
+	@$(eval c ?=)
+	@$(DOCKER_COMP) exec php /app/vendor/bin/phpstan $(c)
 
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'

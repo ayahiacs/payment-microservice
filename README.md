@@ -14,7 +14,7 @@
 1. Purchase one time.
 * Using Shift4 integration.
 * Using ACI (Oppwa) integration.
-2. Code test coverage.
+2. Code test coverage +90%.
 
 ## Docs
 1. TODO: [How to add a new external system](docs/add-external-system.md)

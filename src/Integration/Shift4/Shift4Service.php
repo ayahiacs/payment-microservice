@@ -18,7 +18,6 @@ class Shift4Service implements PurchaseOneTimeInterface
 {
     public function __construct(
         private Shift4Gateway $shift4Gateway,
-        private LoggerInterface $logger
     ) {
     }
 
@@ -39,10 +38,7 @@ class Shift4Service implements PurchaseOneTimeInterface
             /** @var Charge $charge */
             $charge = $this->shift4Gateway->createCharge($chargeRequest);
         } catch (Shift4Exception $e) {
-            // reference: see https://dev.shift4.com/docs/api#error-object
             throw new PurchaseOneTimeException("Shift4 exeption. Code: {$e->getCode()} Type: {$e->getType()} Message: {$e->getMessage()}");
-        } finally {
-            // TODO: save request response logs in DB anyways.
         }
 
         return new PurchaseOneTimeResponseDto(

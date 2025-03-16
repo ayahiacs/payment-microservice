@@ -28,6 +28,7 @@ class ExceptionListener
 
     private function handlePurchaseOneTimeException(ExceptionEvent $event, PurchaseOneTimeException $exception): void
     {
+        $this->logger->warning($exception->getMessage());
         $event->setResponse(new JsonResponse(
             ['error' => $exception->getMessage()],
             Response::HTTP_BAD_REQUEST

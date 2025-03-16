@@ -45,7 +45,7 @@ class AciGateway
                 $response->getContent(), DebitPaymentResponse::class, 'json'
             );
         } catch (ClientExceptionInterface $e) {
-            throw new PurchaseOneTimeException($response->getContent(false));
+            throw new PurchaseOneTimeException($e->getResponse()->getContent(false));
         } catch (ServerExceptionInterface $e) {
             throw new PurchaseOneTimeException($e->getMessage());
         }

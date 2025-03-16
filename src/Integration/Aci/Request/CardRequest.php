@@ -7,14 +7,14 @@ use App\Dto\PurchaseOneTimeRequestDto;
 final class CardRequest
 {
     public function __construct(
-        public $number,
-        public $holder,
-        public $expiryMonth,
-        public $expiryYear,
-        public $cardCvv
+        public string $number,
+        public string $holder,
+        public int $expiryMonth,
+        public int $expiryYear,
+        public string $cardCvv
     ) {}
 
-    public static function createFromPurchaseOneTimeRequestDto(PurchaseOneTimeRequestDto $dto)
+    public static function createFromPurchaseOneTimeRequestDto(PurchaseOneTimeRequestDto $dto): self
     {
         return new self(
             number: $dto->cardNumber,

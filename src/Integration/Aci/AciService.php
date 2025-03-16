@@ -24,7 +24,7 @@ class AciService implements PurchaseOneTimeInterface
         return new PurchaseOneTimeResponseDto(
             transactionId: $debitPaymentResponse->id,
             createdAt: new DateTimeImmutable('now'),
-            amount: $debitPaymentResponse->amount,
+            amount: (int)$debitPaymentResponse->amount,
             currency: $debitPaymentResponse->currency,
             cardBin: $debitPaymentResponse->card->bin,
         );
