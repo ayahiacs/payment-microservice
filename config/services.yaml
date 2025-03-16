@@ -22,3 +22,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+
+    App\EventListener\ExceptionListener:
+        tags: [kernel.event_listener]
+
+    Shift4\Shift4Gateway:
+        arguments:
+            $privateKey: '%env(resolve:SHIFT4_PRIVATE_KEY)%'
+
+
+    App\Integration\Aci\AciGateway:
+        arguments:
+            $apiKey: '%env(resolve:ACI_API_KEY)%'

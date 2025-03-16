@@ -5,6 +5,9 @@ namespace App\Integration\Shift4;
 use App\Contract\PurchaseOneTimeInterface;
 use App\Dto\PurchaseOneTimeRequestDto;
 use App\Dto\PurchaseOneTimeResponseDto;
+use App\Exception\PurchaseOneTimeException;
+use DateTimeImmutable;
+use Psr\Log\LoggerInterface;
 use Shift4\Shift4Gateway;
 use Shift4\Exception\Shift4Exception;
 use Shift4\Request\CardRequest;
@@ -13,9 +16,9 @@ use Shift4\Response\Charge;
 
 class Shift4Service implements PurchaseOneTimeInterface
 {
-    // TODO: pass from config
     public function __construct(
-        private $shift4Gateway = new Shift4Gateway('sk_test_kZZnbRyw5faOdTCrO1rXQopJ')
+        private Shift4Gateway $shift4Gateway,
+        private LoggerInterface $logger
     ) {
     }
 
@@ -36,19 +39,15 @@ class Shift4Service implements PurchaseOneTimeInterface
             /** @var Charge $charge */
             $charge = $this->shift4Gateway->createCharge($chargeRequest);
         } catch (Shift4Exception $e) {
-            // TODO: Handle error response - see https://dev.shift4.com/docs/api#error-object
-            $errorType = $e->getType();
-            $errorCode = $e->getCode();
-            $errorMessage = $e->getMessage();
-            // TODO: Retry the request if the error is server error, if failed 3 times add it to failed jobs.
-            dd($errorMessage);
+            // reference: see https://dev.shift4.com/docs/api#error-object
+            throw new PurchaseOneTimeException("Shift4 exeption. Code: {$e->getCode()} Type: {$e->getType()} Message: {$e->getMessage()}");
         } finally {
-            // TODO: Log everything anyways.
+            // TODO: save request response logs in DB anyways.
         }
 
         return new PurchaseOneTimeResponseDto(
             transactionId: $charge->getId(),
-            createdAt: $charge->getCreated(),
+            createdAt: new DateTimeImmutable('now'),
             amount: $charge->getAmount(),
             currency: $charge->getCurrency(),
             cardBin: $charge->getCard()->getFirst6(),

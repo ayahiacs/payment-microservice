@@ -90,6 +90,7 @@
     },
     "require-dev": {
         "pestphp/pest": "^3.7.4",
+        "phpstan/phpstan": "^2.1",
         "symfony/browser-kit": "7.2.*",
         "symfony/debug-bundle": "7.2.*",
         "symfony/maker-bundle": "^1.62.1",

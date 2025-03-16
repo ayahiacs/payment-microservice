@@ -1,21 +1,19 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-pest()->extend(TestCase::class);
+pest()->extend(WebTestCase::class);
 
 it('purchases one time using aci successfully', function () {
     $client = static::createClient();
-
-    $client->request('POST', '/purchase-one-time/aci', [
-        'json' => [
-            'amount' => 1,
-            'currency' => 'USD',
-            'cardNumber' => '4200000000000000',
-            'cardExpiryYear' => 2025,
-            'cardExpiryMonth' => 12,
-            'cardCvv' => '999',
-        ]
+    
+    $client->jsonRequest('POST', '/api/purchase-one-time/aci', [
+        'amount' => 1,
+        'currency' => 'USD',
+        'cardNumber' => '4200000000000000',
+        'cardExpiryYear' => 2025,
+        'cardExpiryMonth' => 12,
+        'cardCvv' => '999',
     ]);
 
     $response = $client->getResponse();
@@ -26,15 +24,13 @@ it('purchases one time using aci successfully', function () {
 it('purchases one time using shift4 successfully', function () {
     $client = static::createClient();
 
-    $client->request('POST', '/purchase-one-time/shift4', [
-        'json' => [
-            'amount' => 1,
-            'currency' => 'USD',
-            'cardNumber' => '4242424242424242',
-            'cardExpiryYear' => 2025,
-            'cardExpiryMonth' => 12,
-            'cardCvv' => '999',
-        ]
+    $client->jsonRequest('POST', '/api/purchase-one-time/shift4', [
+        'amount' => 1,
+        'currency' => 'USD',
+        'cardNumber' => '4242424242424242',
+        'cardExpiryYear' => 2025,
+        'cardExpiryMonth' => 12,
+        'cardCvv' => '999',
     ]);
 
     $response = $client->getResponse();
